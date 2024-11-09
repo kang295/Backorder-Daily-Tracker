@@ -5,7 +5,7 @@ This project automates the manual data aggregation and management of back-ordere
 
 Through this automated daily back-order tracking system per GBU, the team can monitor real-time back orders with detailed status updates indicating whether each part is handled or requires urgent action. The system has already reduced return authorization rates by **30%** and enhanced customer satisfaction. Integrated into a Tableau dashboard, it enables intuitive, real-time tracking, making it easy for team members to check parts status and act efficiently.
 
-![Backorder-Daily-Tracker](Tableau_dashboard.png)
+![Backorder Daily Tracker](Tableau_Dashboard.png)
 
 ---
 
