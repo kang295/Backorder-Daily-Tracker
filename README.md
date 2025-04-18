@@ -19,20 +19,7 @@ This system aims to:
 -------
 ### 📈 Key Features & Insights
 
-- **Return Authorization (RA) & Supply Delay Monitoring**  
-  Identify parts with a history of frequent return authorizations or delivery delays.
 
-- **6-Month Demand Trend (Per Part)**  
-  Analyze individual part demand patterns to detect abnormal behavior or anticipate restocking needs.
-
-- **Division-Level Demand Trend (Per GBU)**  
-  Aggregate demand trends by Division such as refregirator, Washing Machine, or Cooking for broader strategic insights.
-
-- **Turnover Rate Analysis**  
-  Evaluate inventory efficiency using on-hand quantity, in-transit volume, and turnover rate metrics.
-
-- **Demand Pattern Classification**  
-  Automatically classify demand trends as **Normal**, **Surge**, or **Drop** to detect potential risks.
 
 -------
 ### 🔧 Tools Used
@@ -41,11 +28,17 @@ This system aims to:
 -------
 ### 📁 Data Structure & Initial Checks 
 
-* `Raw Data`: Each PIC updates the shared Excel file monthly for Rep Part, category, division, forecasted demand, RA History, and Supply Delay Status. This Excel file also includes the Rep Part Master sheet.
-* `Inventory`: Part Inventory data that includes on-hand (have), in-transit (move), and open quantity (order) for each part
-* `Daily BO`: Daily back order quantity lists per part
+* `Daily Backorder Report`: Daily back order quantity lists per part (Back order quantity per parts and Inventory status)
+* `Original Parts Inventory`: Part Inventory data that includes open PO quantity (order) for each part by shipment category: AIR, TRK, and SEA
+* `GERP Master`: Detailed information on parts such as sales model, part grade, first_receipt_date
+* `Accesorries`: Accesory parts are dealt separately from regular GBU
+* `BER`: Parts list that are under BER review (BER parts are reviewed separately)
+* `Sub Master Inventory`: Substitute parts inventory (on-hand) quantity per original part
+* `EDW Demand`: Enterprise data warehous contains demand history for each part
+* `Parts RA`: RA history per parts
 * `Supplier`: Supplier information for each part
 * `Bulky Parts`: This data contains the bulky status per part
+* `Part Category`: This contains part class code, division code, category and description
 
 -------
 ### ⚙️ Process
@@ -54,42 +47,63 @@ This system aims to:
    - Aggregating, joining, filtering, and dropping unnecessary fields
 
 2. **Data Transformation**  
-   - Creating new fields (e.g., turnover rate adjusted for bulky parts)  
-   - Restructuring data into long-format for Tableau compatibility  
-   - Detecting demand trends (Normal / Surge / Drop)
+   - Creating new fields (e.g., turnover rate adjusted for bulky parts)
+     * Part Age: Determines how old the part is from its registered date (for new part checking - highest risk)
+     * Streak: Count the number of orders received on specific parts within 2 weeks (14 days)
+     * Category: Finding part category using division code and part class code
+     * Desc: Finding part description using part class code
+     * Flag: This column contains if the parts are currently back-ordered but solved within a week or two , or enough on-hand (just system error), or No ETA at all (high risk)
 
 3. **Data Loading**  
-   - Store processed data in a **BigQuery** table  
-   - Connect BigQuery to **Tableau** for visualization
+   - Export processed data as a CSV file
+   - Connect CSV file to **Tableau** for visualization
 
 -------
 ### ✅ Business Impact
 
-- Reduced **manual reporting time by over 80%** by automating the data pipeline and dashboard generation
-- Enabled **weekly monitoring** of 330+ key service parts, improving visibility and early issue sensing across divisions
-- Helped executives **proactively address supply chain risks** by providing timely insights
 
 -------
 ### Final Dataframe Schema for Data Visualization
-| Field name     | Type    | Mode     |
-|----------------|---------|----------|
-| rep\_part      | STRING  | NULLABLE |
-| category       | STRING  | NULLABLE |
-| division       | STRING  | NULLABLE |
-| ra\_history\_yn | BOOLEAN | NULLABLE |
-| sd\_yn         | BOOLEAN | NULLABLE |
-| inventory      | INTEGER | NULLABLE |
-| transit        | INTEGER | NULLABLE |
-| open           | INTEGER | NULLABLE |
-| BO qty         | INTEGER | NULLABLE |
-| description    | STRING  | NULLABLE |
-| supplier\_code | STRING  | NULLABLE |
-| current\_TO    | FLOAT   | NULLABLE |
-| demand\_trend  | STRING  | NULLABLE |
-| bulky          | BOOLEAN | NULLABLE |
-| Review         | BOOLEAN | NULLABLE |
-| month          | STRING  | NULLABLE |
-| demand         | INTEGER | NULLABLE |
+
+| Field name           | Type      | Mode     |
+|----------------------|-----------|----------|
+| Part Age             | OBJECT    | NOT NULL |
+| Order Date           | DATETIME  | NOT NULL |
+| Delay                | INTEGER   | NOT NULL |
+| Parts No             | OBJECT    | NOT NULL |
+| Parts Class Code     | OBJECT    | NOT NULL |
+| Key Parts            | OBJECT    | NOT NULL |
+| Functionality        | OBJECT    | NOT NULL |
+| Customer             | OBJECT    | NOT NULL |
+| Company Code         | OBJECT    | NOT NULL |
+| Division Code        | OBJECT    | NOT NULL |
+| BO                   | INTEGER   | NOT NULL |
+| OH                   | INTEGER   | NOT NULL |
+| IS                   | INTEGER   | NOT NULL |
+| WH                   | INTEGER   | NOT NULL |
+| IT                   | INTEGER   | NOT NULL |
+| ETA                  | OBJECT    | NOT NULL |
+| OPEN                 | FLOAT     | NULLABLE |
+| AIR                  | FLOAT     | NULLABLE |
+| TRK                  | FLOAT     | NULLABLE |
+| SEA                  | FLOAT     | NULLABLE |
+| Model                | OBJECT    | NULLABLE |
+| first_receipt_date   | DATETIME  | NULLABLE |
+| grade                | OBJECT    | NULLABLE |
+| Sub                  | INTEGER   | NOT NULL |
+| 09                   | INTEGER   | NOT NULL |
+| 10                   | INTEGER   | NOT NULL |
+| 11                   | INTEGER   | NOT NULL |
+| 12                   | INTEGER   | NOT NULL |
+| 01                   | INTEGER   | NOT NULL |
+| 02                   | INTEGER   | NOT NULL |
+| 03                   | INTEGER   | NOT NULL |
+| Streak               | INTEGER   | NOT NULL |
+| RA                   | INTEGER   | NOT NULL |
+| Supplier             | OBJECT    | NULLABLE |
+| Category             | OBJECT    | NOT NULL |
+| Desc                 | OBJECT    | NOT NULL |
+| Flag                 | OBJECT    | NOT NULL |
 
 -------
 ### Dashboard Preview
@@ -99,14 +113,5 @@ This system aims to:
 -------
 ### **Recommendation** 
 
-- **Target Turnover Benchmarks per Part/Category**  
-  Establish target turnover rates for each part or category to help identify gaps between current turnover and the target.
-  This would allow for more precise monitoring of underperforming items and provide executives with actionable insights to improve stock movement.
-
-- **Minimum Stock Level Status (Safety Stock)**  
-  Implement minimum stock level Status for key parts. This will help assess if PICs are utilizing safety stock effectively and ensure that critical parts are not understocked during high-demand periods.
-
-- **Part Registration Date**  
-  This provides insight into whether a low current turnover rate is due to its new part status or a recent surge in demand unlike the normal period.
 
 These additions could help executives better contextualize performance, improve inventory management, and make more informed decisions regarding procurement and replenishment strategies.
