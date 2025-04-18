@@ -106,10 +106,16 @@ This system aims to:
 | Flag                 | OBJECT    | NOT NULL |
 
 -------
-### Dashboard Preview
-![Monitoring Dashboard](Key%20Parts%20Monitoring%20Dashboard.JPG)  
+### Default Dashboard Preview
+![Monitoring Dashboard](Backorder%20Dashboard%20Default.JPG)  
 
-![Monitoring Dashboard](Key%20Parts%20Monitoring%20Filtered.JPG)
+### Use case Preview
+- PIC who is in charge of CVT (Cooking) Division will select division code as CVT
+- Select Flag (No ETA and Flag) to only see the back ordered parts that have no upcoming ETA or quantity we order is not enough to cover back order
+- Only interested in New parts (High risk) since we cannot forecast the demand afterwards
+  
+![Monitoring Dashboard](Usecase%20example.JPG)
+
 -------
 ### **Recommendation** 
 
