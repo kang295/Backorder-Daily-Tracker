@@ -1,6 +1,9 @@
 # SVC-Backorder Daily Tracker System
 
-### 📌 Project Background
+### 📊 Default Dashboard Preview
+![Monitoring Dashboard](Backorder%20Dashboard%20Default.JPG)  
+
+### 🔍 Project Background
 -------
 The management of back-ordered service parts has historically been a labor-intensive process. Personnel were required to manually consolidate data from various Excel files and apply intricate filters to pinpoint back-ordered parts lacking proper corrective measures. This manual approach was time-consuming, prone to errors, and hindered the ability to promptly address critical part shortages. The lack of an automated system resulted in delayed identification of problematic backorders and potentially impacted service operations due to the inability to proactively manage part availability.
 
@@ -9,17 +12,35 @@ The management of back-ordered service parts has historically been a labor-inten
 
 The primary objective of this project is to **develop an automated system for the monitoring and analysis of back-ordered service parts**.   
 
-This system aims to:
-1. Automate Data Integration: Eliminate the manual merging of multiple Excel files by automatically integrating relevant datasets into a unified platform.
-2. Intelligent Filtering: Automatically filter out back-ordered parts that have already been addressed through corrective actions such as Air shipments, Free of Charge (FOC) orders, or the presence of sufficient In Transit stock.
-3. Minimize Manual Effort: Significantly reduce the manual effort required by personnel to identify and analyze critical back-ordered parts.
-4. Enable Data-Driven Decision-Making: Provide readily available and filtered data to facilitate informed decision-making regarding the management of back-ordered parts.
-5. Enhance Efficiency and Proactivity: Streamline the identification of critical part shortages, enabling more efficient and proactive management of essential service parts and communication with suppliers, ultimately improving service operations.
+**This system aims to**:
+1. **Automate Data Integration**:
+   Eliminate the manual merging of multiple Excel files by automatically integrating relevant datasets into a unified platform.
+2. **Intelligent Filtering**:
+   Automatically filter out back-ordered parts that have already been addressed through corrective actions such as Air shipments, Free of Charge (FOC) orders, or the presence of sufficient In Transit stock.
+3. **Minimize Manual Effort**:
+   Significantly reduce the manual effort required by personnel to identify and analyze critical back-ordered parts.
+4. **Enable Data-Driven Decision-Making**:
+   Provide readily available and filtered data to facilitate informed decision-making regarding the management of back-ordered parts.
+5. **Enhance Efficiency and Proactivity**:
+    Streamline the identification of critical part shortages, enabling more efficient and proactive management of essential service parts and communication with suppliers, ultimately improving service operations.
 
 -------
 ### 📈 Key Features & Insights
 
+- **Real-Time Backorder & SKU Tracking**
+Provides a daily snapshot of backorders and SKU levels to monitor operational health and quickly flag urgent issues.
 
+- **Strategic Parts Distribution Analysis**
+Analyzes parts by key attributes like registration date and grade to identify new part rollout issues or importance of current situation.
+
+- **Proactive Critical Parts Management**
+Flags parts with high RA rates or frequent supply delays, enabling early intervention to minimize impact and improve customer satisfaction.
+
+- **Demand Trend Insights from Backorder Data**
+Visualizes daily backorder trends to quickly spot bottlenecks or demand spikes—helping adjust inventory before issues escalate.
+
+- **Comprehensive Parts Overview**
+Consolidates supplier info, model links, shipment type volumes, inventory levels, and recent demand to support smarter procurement and planning decisions.
 
 -------
 ### 🔧 Tools Used
@@ -47,7 +68,7 @@ This system aims to:
    - Aggregating, joining, filtering, and dropping unnecessary fields
 
 2. **Data Transformation**  
-   - Creating new fields (e.g., turnover rate adjusted for bulky parts)
+   - Creating new fields
      * Part Age: Determines how old the part is from its registered date (for new part checking - highest risk)
      * Streak: Count the number of orders received on specific parts within 2 weeks (14 days)
      * Category: Finding part category using division code and part class code
@@ -105,15 +126,11 @@ This system aims to:
 | Desc                 | OBJECT    | NOT NULL |
 | Flag                 | OBJECT    | NOT NULL |
 
--------
-### Default Dashboard Preview
-![Monitoring Dashboard](Backorder%20Dashboard%20Default.JPG)  
-
+------
 ### Use case Preview
 - PIC who is in charge of CVT (Cooking) Division will select division code as CVT
 - Select Flag (No ETA and Flag) to only see the back ordered parts that have no upcoming ETA or quantity we order is not enough to cover back order
 - Only interested in New parts (High risk) since we cannot forecast the demand afterwards
-  
 ![Monitoring Dashboard](Usecase%20example.JPG)
 
 -------
