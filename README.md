@@ -76,8 +76,8 @@ Consolidates supplier info, model links, shipment type volumes, inventory levels
      * Flag: This column contains if the parts are currently back-ordered but solved within a week or two , or enough on-hand (just system error), or No ETA at all (high risk)
 
 3. **Data Loading**  
-   - Export processed data as a CSV file
-   - Connect CSV file to **Tableau** for visualization
+   - Export processed data as a CSV file and update Big Query database as notebook runs the code
+   - Connect GCP database to **Tableau** for visualization
 
 -------
 ### ✅ Business Impact
