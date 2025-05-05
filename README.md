@@ -1,14 +1,14 @@
 # SVC-Backorder Daily Tracker System
 
-### 📊 **Dashboard Preview**
+## ✨ **Dashboard Preview**
 ![Monitoring Dashboard](Backorder%20Dashboard%20Default.JPG)  
 
-### 🔍 Project Background
+## 💬 **Project Background**
 -------
 In service operations, resolving back-orders and ensuring timely delivery of service parts are critical performance metrics. However, I discovered that managing back-ordered parts was largely manual—relying on time-consuming data consolidation from multiple Excel files and complex filtering to identify unresolved issues. This process not only delayed response times but also introduced errors, limiting the team’s ability to proactively manage part shortages and maintain service quality.
 
 -------
-### 🎯 Objective
+## 📝 **Objective**
 
 To develop an automated system that streamlines the monitoring and analysis of back-ordered service parts by filtering out already addressed or in-transit items—eliminating manual, repetitive tasks, reducing human error, and enabling the team to operate more efficiently through immediate identification and resolution of critical shortages.
 
@@ -25,7 +25,7 @@ To develop an automated system that streamlines the monitoring and analysis of b
     Streamline the identification of critical part shortages, enabling more efficient and proactive management of essential service parts and communication with suppliers, ultimately improving service operations.
 
 -------
-### 📈 Key Features & Insights
+## 📈 Key Features & Insights
 
 - **Real-Time Backorder & SKU Tracking**
 Provides a daily snapshot of backorders and SKU levels to monitor operational health and quickly flag urgent issues.
@@ -43,11 +43,11 @@ Visualizes daily backorder trends to quickly spot bottlenecks or demand spikes�
 Consolidates supplier info, model links, shipment type volumes, inventory levels, and recent demand to support smarter procurement and planning decisions.
 
 -------
-### 🔧 Tools Used
+## 🛠️ Tools Used
 - Python (Pandas, Numpy), BigQuery (GCP), Tableau
 
 -------
-### 📁 Datasets Used
+## 📁 Datasets Used
 
 * `Daily Backorder Report`: Daily back order quantity lists per part (Back order quantity per parts and Inventory status)
 * `Original Parts Inventory`: Part Inventory data that includes open PO quantity (order) for each part by shipment category: AIR, TRK, and SEA
@@ -61,7 +61,7 @@ Consolidates supplier info, model links, shipment type volumes, inventory levels
 * `Part Category`: This contains part class code, division code, category and description
 
 -------
-### ⚙️ Process
+## ⚙️ Process
 
 1. **Data Extraction & Cleaning using Python (Pandas)**  
    - Aggregating, joining, filtering, and dropping unnecessary fields
@@ -79,7 +79,7 @@ Consolidates supplier info, model links, shipment type volumes, inventory levels
    - Connect GCP database to **Tableau** for visualization
 
 -------
-### ✅ Business Impact
+## ✅ Business Impact
 
 1. Automated data processing and reduced daily manual work by 30+ minutes per team member and eliminated errors from Excel-based tasks.
 
@@ -88,7 +88,7 @@ Consolidates supplier info, model links, shipment type volumes, inventory levels
 3. Enhanced customer satisfaction by streamlining part delivery, resulting in a 25% reduction in Return Authorization requests.
 
 -------
-### Final Dataframe Schema for Data Visualization
+## Final Dataframe Schema for Data Visualization
 
 | Field name           | Type      | Mode     |
 |----------------------|-----------|----------|
@@ -131,14 +131,18 @@ Consolidates supplier info, model links, shipment type volumes, inventory levels
 | Flag                 | OBJECT    | NOT NULL |
 
 ------
-### Use case Preview
-- PIC who is in charge of CVT (Cooking) Division will select division code as CVT
-- Select Flag (No ETA and Flag) to only see the back ordered parts that have no upcoming ETA or quantity we order is not enough to cover back order
-- Only interested in New parts (High risk) since we cannot forecast the demand afterwards
+## 💡 **Use Case Scenario: Customized Backorder Monitoring**
+
+1. A supply planner responsible for CVT, DVT, and CDT divisions was unable to manage backorders for the past 4 days.
+
+2. Set the date range to April 26–30 and filtered by Division Code for CVT, DVT, and EVT.
+
+3. Since all suppliers except China and Korea are on holiday during that period, filtered the data to show only backorders supplied from China and Korea.
+
+4. Applied flag filter to display items that either have no ETA or have backorder quantities exceeding expected shipping volume.
+
+5. The result showed 130 backorder cases across 30 unique parts, with many being A-grade items—indicating high customer demand or potential Return Authorization (RA) risk.
+
+6. This quick, customized dashboard enables immediate visibility into critical issues and serves as a practical tool for supplier communication and issue resolution.
+
 ![Monitoring Dashboard](Usecase%20example.JPG)
-
--------
-### **Recommendation** 
-
-
-These additions could help executives better contextualize performance, improve inventory management, and make more informed decisions regarding procurement and replenishment strategies.
