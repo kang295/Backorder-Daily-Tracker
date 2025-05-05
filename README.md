@@ -1,6 +1,6 @@
 # SVC-Backorder Daily Tracker System
 
-### 📊 Default Dashboard Preview
+### 📊 **Dashboard Preview**
 ![Monitoring Dashboard](Backorder%20Dashboard%20Default.JPG)  
 
 ### 🔍 Project Background
