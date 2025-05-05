@@ -5,12 +5,12 @@
 
 ### 🔍 Project Background
 -------
-The management of back-ordered service parts has historically been a labor-intensive process. Personnel were required to manually consolidate data from various Excel files and apply intricate filters to pinpoint back-ordered parts lacking proper corrective measures. This manual approach was time-consuming, prone to errors, and hindered the ability to promptly address critical part shortages. The lack of an automated system resulted in delayed identification of problematic backorders and potentially impacted service operations due to the inability to proactively manage part availability.
+In service operations, resolving back-orders and ensuring timely delivery of service parts are critical performance metrics. However, I discovered that managing back-ordered parts was largely manual—relying on time-consuming data consolidation from multiple Excel files and complex filtering to identify unresolved issues. This process not only delayed response times but also introduced errors, limiting the team’s ability to proactively manage part shortages and maintain service quality.
 
 -------
 ### 🎯 Objective
 
-The primary objective of this project is to **develop an automated system for the monitoring and analysis of back-ordered service parts**.   
+To develop an automated system that streamlines the monitoring and analysis of back-ordered service parts by filtering out already addressed or in-transit items—eliminating manual, repetitive tasks, reducing human error, and enabling the team to operate more efficiently through immediate identification and resolution of critical shortages.
 
 **This system aims to**:
 1. **Automate Data Integration**:
@@ -44,10 +44,10 @@ Consolidates supplier info, model links, shipment type volumes, inventory levels
 
 -------
 ### 🔧 Tools Used
-- Python (Pandas, Numpy), BigQuery, Tableau
+- Python (Pandas, Numpy), BigQuery (GCP), Tableau
 
 -------
-### 📁 Data Structure & Initial Checks 
+### 📁 Datasets Used
 
 * `Daily Backorder Report`: Daily back order quantity lists per part (Back order quantity per parts and Inventory status)
 * `Original Parts Inventory`: Part Inventory data that includes open PO quantity (order) for each part by shipment category: AIR, TRK, and SEA
@@ -58,16 +58,15 @@ Consolidates supplier info, model links, shipment type volumes, inventory levels
 * `EDW Demand`: Enterprise data warehous contains demand history for each part
 * `Parts RA`: RA history per parts
 * `Supplier`: Supplier information for each part
-* `Bulky Parts`: This data contains the bulky status per part
 * `Part Category`: This contains part class code, division code, category and description
 
 -------
 ### ⚙️ Process
 
-1. **Data Extraction & Cleaning**  
+1. **Data Extraction & Cleaning using Python (Pandas)**  
    - Aggregating, joining, filtering, and dropping unnecessary fields
 
-2. **Data Transformation**  
+2. **Data Transformation using Python Programming**  
    - Creating new fields
      * Part Age: Determines how old the part is from its registered date (for new part checking - highest risk)
      * Streak: Count the number of orders received on specific parts within 2 weeks (14 days)
@@ -75,13 +74,18 @@ Consolidates supplier info, model links, shipment type volumes, inventory levels
      * Desc: Finding part description using part class code
      * Flag: This column contains if the parts are currently back-ordered but solved within a week or two , or enough on-hand (just system error), or No ETA at all (high risk)
 
-3. **Data Loading**  
+3. **Data Loading from BigQuery to Tableau**  
    - Export processed data as a CSV file and update Big Query database as notebook runs the code
    - Connect GCP database to **Tableau** for visualization
 
 -------
 ### ✅ Business Impact
 
+1. Automated data processing and reduced daily manual work by 30+ minutes per team member and eliminated errors from Excel-based tasks.
+
+2. Developed a real-time dashboard enabling leadership to track back-order issues and monitor resolution ownership with just a few clicks.
+
+3. Enhanced customer satisfaction by streamlining part delivery, resulting in a 25% reduction in Return Authorization requests.
 
 -------
 ### Final Dataframe Schema for Data Visualization
@@ -112,13 +116,13 @@ Consolidates supplier info, model links, shipment type volumes, inventory levels
 | first_receipt_date   | DATETIME  | NULLABLE |
 | grade                | OBJECT    | NULLABLE |
 | Sub                  | INTEGER   | NOT NULL |
-| 09                   | INTEGER   | NOT NULL |
 | 10                   | INTEGER   | NOT NULL |
 | 11                   | INTEGER   | NOT NULL |
 | 12                   | INTEGER   | NOT NULL |
 | 01                   | INTEGER   | NOT NULL |
 | 02                   | INTEGER   | NOT NULL |
 | 03                   | INTEGER   | NOT NULL |
+| 04                   | INTEGER   | NOT NULL |
 | Streak               | INTEGER   | NOT NULL |
 | RA                   | INTEGER   | NOT NULL |
 | Supplier             | OBJECT    | NULLABLE |
