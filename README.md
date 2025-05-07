@@ -141,7 +141,7 @@ Consolidates supplier info, model links, shipment type volumes, inventory levels
 
 4. Applied flag filter to display items that either have no ETA or have backorder quantities exceeding expected shipping volume.
 
-5. The result showed 130 backorder cases across 30 unique parts, with many being A-grade items—indicating high customer demand or potential Return Authorization (RA) risk.
+5. The result showed 103 backorder cases across 29 unique parts, with many being A-grade items—indicating high customer demand or potential Return Authorization (RA) risk.
 
 6. This quick, customized dashboard enables immediate visibility into critical issues and serves as a practical tool for supplier communication and issue resolution.
 
