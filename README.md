@@ -137,7 +137,7 @@ Consolidates supplier info, model links, shipment type volumes, inventory levels
 
 1. A supply planner responsible for CVT, DVT, and CDT divisions was unable to manage backorders for the past 4 days.
 
-2. Set the date range to April 26–30 and filtered by Division Code for CVT, DVT, and EVT.
+2. Set the date range to May 05–08 and filtered by Division Code for CVT, DVT, and EVT.
 
 3. Since all suppliers except China and Korea are on holiday during that period, filtered the data to show only backorders supplied from China and Korea.
 
