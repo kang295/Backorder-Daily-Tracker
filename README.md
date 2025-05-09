@@ -1,6 +1,6 @@
 # SVC-Backorder Daily Tracker System
 
-## ✨ **Dashboard Preview**
+## ✨**Dashboard Preview**
 ![Monitoring Dashboard](Backorder%20Dashboard%20Default.JPG)  
 
 ## 💬 **Project Background**
@@ -132,6 +132,7 @@ Consolidates supplier info, model links, shipment type volumes, inventory levels
 
 ------
 ## 💡 **Use Case Scenario: Customized Backorder Monitoring**
+![Monitoring Dashboard](Usecase%20example.JPG)
 
 1. A supply planner responsible for CVT, DVT, and CDT divisions was unable to manage backorders for the past 4 days.
 
@@ -144,5 +145,3 @@ Consolidates supplier info, model links, shipment type volumes, inventory levels
 5. The result showed 103 backorder cases across 29 unique parts, with many being A-grade items—indicating high customer demand or potential Return Authorization (RA) risk.
 
 6. This quick, customized dashboard enables immediate visibility into critical issues and serves as a practical tool for supplier communication and issue resolution.
-
-![Monitoring Dashboard](Usecase%20example.JPG)
