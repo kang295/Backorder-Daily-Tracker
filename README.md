@@ -132,6 +132,7 @@ Consolidates supplier info, model links, shipment type volumes, inventory levels
 
 ------
 ## 💡 **Use Case Scenario: Customized Backorder Monitoring**
+
 ![Monitoring Dashboard](Usecase%20example.JPG)
 
 1. A supply planner responsible for CVT, DVT, and CDT divisions was unable to manage backorders for the past 4 days.
